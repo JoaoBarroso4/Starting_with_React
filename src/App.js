@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: 'Joao',
+            counter: 0
+        };
+
+        this.aumentar = this.aumentar.bind(this);
+        this.diminuir = this.diminuir.bind(this);
+    }
+
+    aumentar(){
+        let state = this.state;
+        state.counter += 1;
+
+        this.setState(state);
+    }
+
+    diminuir(){
+        let state = this.state;
+
+        if(state.counter === 0){
+            alert("You've reached zero already!");
+            return;
+        }
+
+        state.counter -=1;
+        this.setState(state);
+    }
+
+    //loads the components
+    render() {
+        return(
+            <div>
+                <h3>Hello, {this.state.name}!</h3>
+                <h4>
+                    Contador
+                    <button onClick={this.diminuir}>-</button>{this.state.counter}<button onClick={this.aumentar}>+</button>
+                </h4>
+            </div>
+        );
+    }
 }
+
 
 export default App;
